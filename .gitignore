@@ -4,12 +4,6 @@
 /env/
 __pycache__/
 *.pyc
-/weights/
-/models/
-*.ckpt
-*.pth
-*.onnx
-*.safetensors
 /datasets/
 /outputs/
 /input/
