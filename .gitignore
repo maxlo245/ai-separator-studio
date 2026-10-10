@@ -9,4 +9,5 @@ __pycache__/
 /input/
 /.serena/
 *.log
+/artifacts/
 .DS_Store

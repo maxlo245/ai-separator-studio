@@ -2,9 +2,42 @@
 
 Application Windows pour séparer une chanson en pistes audio avec des modèles d’intelligence artificielle. Le lanceur permet de choisir un fichier audio ou vidéo, un modèle, puis un dossier où enregistrer les pistes WAV.
 
+## Application Windows (.exe)
+
+Le dépôt contient aussi `SeparatorStudio.App`, une application Windows avec interface graphique qui utilise directement l'installation locale de `audio-separator`. Elle ne téléverse aucun fichier : le traitement et les modèles restent sur votre machine.
+
+L'application permet de :
+
+- sélectionner le dépôt, un fichier à traiter et le dossier de sortie ;
+- choisir parmi les modèles réellement présents dans `models`, avec une indication d'usage ;
+- régler FP16, `demucs_shifts` et `demucs_overlap` lorsque le modèle Demucs est utilisé ;
+- surveiller un dossier continuellement : les nouveaux fichiers audio ou vidéo sont ajoutés à la file de traitement ;
+- afficher les journaux et les erreurs émis par `audio-separator`.
+
+Après avoir installé l'environnement d'inférence décrit ci-dessous, créez l'exécutable Windows autonome :
+
+```powershell
+.\Publish-SeparatorStudio.ps1
+```
+
+L'exécutable est produit dans `artifacts\SeparatorStudio\SeparatorStudio.App.exe`. Il est autonome : l'utilisateur final n'a pas besoin d'installer .NET, mais le dépôt AI, l'environnement `inference-env`, les modèles, FFmpeg et les pilotes GPU restent nécessaires.
+
+### Fonctionnement 24/7
+
+Dans l'application, sélectionnez **Surveiller un dossier en continu**, choisissez un dossier d'entrée et lancez la surveillance. Fermer la fenêtre réduit l'application dans la zone de notification ; utilisez **Arrêter la surveillance** avant de quitter réellement.
+
+Pour la relancer automatiquement à chaque ouverture de session Windows, après publication, exécutez :
+
+```powershell
+.\Install-AlwaysOn.ps1
+```
+
+Ce script installe une tâche planifiée qui redémarre l'application jusqu'à trois fois en cas d'échec. Pour un fonctionnement réellement continu, utilisez un PC ou serveur Windows maintenu sous tension, désactivez la mise en veille et conservez une session utilisateur ouverte ; une application graphique ne peut pas traiter des fichiers dans une session Windows inexistante.
+
 ## Ce que contient le dépôt
 
 - Les scripts PowerShell pour lancer la séparation et l’entraînement.
+- L'application source WinForms et les scripts de publication de l'exécutable.
 - Les modèles de séparation, versionnés avec [Git LFS](https://git-lfs.com/).
 - Les poids d’un modèle d’entraînement.
 
