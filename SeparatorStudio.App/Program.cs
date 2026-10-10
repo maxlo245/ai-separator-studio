@@ -162,15 +162,21 @@ internal sealed class MainForm : Form
             return;
         }
 
-        var knownProfiles = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        var knownProfiles = new Dictionary<string, ModelProfile>(StringComparer.OrdinalIgnoreCase)
         {
-            ["vocals_mel_band_roformer.ckpt"] = "Voix + instrumental. Très bonne séparation vocale ; recommandé par défaut.",
-            ["htdemucs_6s.yaml"] = "Six pistes : voix, batterie, basse, guitare, piano et autres. Plus lent, mais plus détaillé.",
-            ["htdemucs.yaml"] = "Quatre pistes Demucs : voix, batterie, basse et autres.",
-            ["bs_roformer_vocals_revive_v3e_unwa.ckpt"] = "Voix + instrumental. Modèle spécialisé dans la restitution des voix.",
-            ["bs_roformer_vocals_revive_v2_unwa.ckpt"] = "Voix + instrumental. Variante de restauration vocale.",
-            ["mel_band_roformer_vocals_becruily.ckpt"] = "Voix + instrumental. Variante MelBand-RoFormer.",
-            ["melband_roformer_inst_v1e_plus.ckpt"] = "Instrumental + voix. Variante optimisée pour l'instrumental."
+            ["vocals_mel_band_roformer.ckpt"] = new("vocals_mel_band_roformer.ckpt", ModelTier.Best, "Voix + instrumental. Meilleur choix général pour isoler les voix."),
+            ["htdemucs_6s.yaml"] = new("htdemucs_6s.yaml", ModelTier.High, "Six pistes : voix, batterie, basse, guitare, piano et autres."),
+            ["htdemucs.yaml"] = new("htdemucs.yaml", ModelTier.Medium, "Quatre pistes : voix, batterie, basse et autres."),
+            ["htdemucs_ft.yaml"] = new("htdemucs_ft.yaml", ModelTier.High, "Quatre pistes Demucs affinées : voix, batterie, basse et autres."),
+            ["hdemucs_mmi.yaml"] = new("hdemucs_mmi.yaml", ModelTier.Medium, "Quatre pistes Demucs. Bon compromis qualité / rapidité."),
+            ["bs_roformer_vocals_revive_v3e_unwa.ckpt"] = new("bs_roformer_vocals_revive_v3e_unwa.ckpt", ModelTier.Best, "Voix + instrumental. Spécialisé dans la restitution des voix."),
+            ["bs_roformer_vocals_revive_v2_unwa.ckpt"] = new("bs_roformer_vocals_revive_v2_unwa.ckpt", ModelTier.High, "Voix + instrumental. Variante de restauration vocale."),
+            ["mel_band_roformer_vocals_becruily.ckpt"] = new("mel_band_roformer_vocals_becruily.ckpt", ModelTier.High, "Voix + instrumental. Variante MelBand-RoFormer."),
+            ["melband_roformer_inst_v1e_plus.ckpt"] = new("melband_roformer_inst_v1e_plus.ckpt", ModelTier.High, "Instrumental + voix. Optimisé pour l'instrumental."),
+            ["mel_band_roformer_instrumental_becruily.ckpt"] = new("mel_band_roformer_instrumental_becruily.ckpt", ModelTier.High, "Instrumental + voix. Variante MelBand-RoFormer."),
+            ["mel_band_roformer_instrumental_fv7z_gabox.ckpt"] = new("mel_band_roformer_instrumental_fv7z_gabox.ckpt", ModelTier.High, "Instrumental + voix. Variante MelBand-RoFormer."),
+            ["mel_band_roformer_kim_ft2_bleedless_unwa.ckpt"] = new("mel_band_roformer_kim_ft2_bleedless_unwa.ckpt", ModelTier.Best, "Voix + instrumental. Privilégie la réduction des fuites entre pistes."),
+            ["bs_roformer_instrumental_resurrection_unwa.ckpt"] = new("bs_roformer_instrumental_resurrection_unwa.ckpt", ModelTier.Best, "Instrumental + voix. Modèle spécialisé dans l'instrumental.")
         };
 
         foreach (var file in Directory.EnumerateFiles(modelDirectory)
@@ -179,7 +185,7 @@ internal sealed class MainForm : Form
                      .OrderBy(Path.GetFileName))
         {
             var name = Path.GetFileName(file);
-            profiles.Add(new ModelProfile(name, knownProfiles.GetValueOrDefault(name, "Modèle local détecté. Consultez sa documentation avant emploi.")));
+            profiles.Add(knownProfiles.GetValueOrDefault(name, CreateUnclassifiedProfile(name)));
         }
 
         modelSelector.DataSource = profiles;
@@ -195,7 +201,10 @@ internal sealed class MainForm : Form
             return;
         }
 
-        modelDescription.Text = profile.Description;
+        modelDescription.Text = $"{profile.Tier.Label()} — {profile.Tier.QualityDescription()} | "
+            + $"{profile.Tier.SpeedDescription()} | GPU conseillé : {profile.Tier.RecommendedVram()}.{Environment.NewLine}"
+            + $"{profile.Description}{Environment.NewLine}"
+            + "Indication de compromis : la qualité dépend aussi du morceau source.";
         var demucs = profile.FileName.Contains("demucs", StringComparison.OrdinalIgnoreCase);
         demucsShifts.Enabled = demucs;
         demucsOverlap.Enabled = demucs;
@@ -518,10 +527,74 @@ internal sealed class MainForm : Form
         settings.Save();
     }
 
-    private sealed record ModelProfile(string FileName, string Description)
+    private static ModelProfile CreateUnclassifiedProfile(string fileName)
     {
-        public override string ToString() => FileName;
+        var tier = fileName.Contains("demucs", StringComparison.OrdinalIgnoreCase)
+            ? ModelTier.Low
+            : ModelTier.Medium;
+        return new ModelProfile(fileName, tier, "Modèle local détecté. Niveau estimé d'après sa famille ; consultez sa documentation pour son usage précis.");
     }
+
+    private sealed record ModelProfile(string FileName, ModelTier Tier, string Description)
+    {
+        public override string ToString() => $"{Tier.Badge()} {Tier.Label()} — {FileName}";
+    }
+}
+
+internal enum ModelTier
+{
+    Low,
+    Medium,
+    High,
+    Best
+}
+
+internal static class ModelTierExtensions
+{
+    public static string Badge(this ModelTier tier) => tier switch
+    {
+        ModelTier.Low => "[1/4]",
+        ModelTier.Medium => "[2/4]",
+        ModelTier.High => "[3/4]",
+        ModelTier.Best => "[4/4]",
+        _ => throw new ArgumentOutOfRangeException(nameof(tier))
+    };
+
+    public static string Label(this ModelTier tier) => tier switch
+    {
+        ModelTier.Low => "Faible",
+        ModelTier.Medium => "Moyen",
+        ModelTier.High => "Élevé",
+        ModelTier.Best => "Meilleur",
+        _ => throw new ArgumentOutOfRangeException(nameof(tier))
+    };
+
+    public static string QualityDescription(this ModelTier tier) => tier switch
+    {
+        ModelTier.Low => "qualité de base",
+        ModelTier.Medium => "bon compromis qualité / temps",
+        ModelTier.High => "qualité élevée",
+        ModelTier.Best => "qualité maximale recommandée",
+        _ => throw new ArgumentOutOfRangeException(nameof(tier))
+    };
+
+    public static string SpeedDescription(this ModelTier tier) => tier switch
+    {
+        ModelTier.Low => "rapide",
+        ModelTier.Medium => "vitesse équilibrée",
+        ModelTier.High => "plus lent",
+        ModelTier.Best => "le plus exigeant",
+        _ => throw new ArgumentOutOfRangeException(nameof(tier))
+    };
+
+    public static string RecommendedVram(this ModelTier tier) => tier switch
+    {
+        ModelTier.Low => "4 Go ou plus",
+        ModelTier.Medium => "6 Go ou plus",
+        ModelTier.High => "8 Go ou plus",
+        ModelTier.Best => "10 Go ou plus",
+        _ => throw new ArgumentOutOfRangeException(nameof(tier))
+    };
 }
 
 internal sealed class AppSettings

@@ -9,7 +9,7 @@ Le dépôt contient aussi `SeparatorStudio.App`, une application Windows avec in
 L'application permet de :
 
 - sélectionner le dépôt, un fichier à traiter et le dossier de sortie ;
-- choisir parmi les modèles réellement présents dans `models`, avec une indication d'usage ;
+- choisir parmi les modèles réellement présents dans `models`, avec une indication de niveau (**Faible**, **Moyen**, **Élevé** ou **Meilleur**), vitesse, VRAM GPU conseillée et usage ;
 - régler FP16, `demucs_shifts` et `demucs_overlap` lorsque le modèle Demucs est utilisé ;
 - surveiller un dossier continuellement : les nouveaux fichiers audio ou vidéo sont ajoutés à la file de traitement ;
 - afficher les journaux et les erreurs émis par `audio-separator`.
@@ -21,6 +21,8 @@ Après avoir installé l'environnement d'inférence décrit ci-dessous, créez l
 ```
 
 L'exécutable est produit dans `artifacts\SeparatorStudio\SeparatorStudio.App.exe`. Il est autonome : l'utilisateur final n'a pas besoin d'installer .NET, mais le dépôt AI, l'environnement `inference-env`, les modèles, FFmpeg et les pilotes GPU restent nécessaires.
+
+Les niveaux de modèles sont des repères pour choisir le compromis : **Faible** privilégie la rapidité, **Moyen** l'équilibre, **Élevé** la qualité, et **Meilleur** les modèles recommandés les plus exigeants. La séparation obtenue dépend aussi de la qualité et du mixage du fichier source.
 
 ### Fonctionnement 24/7
 
