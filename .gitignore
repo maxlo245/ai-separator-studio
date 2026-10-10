@@ -10,4 +10,6 @@ __pycache__/
 /.serena/
 *.log
 /artifacts/
+/SeparatorStudio.App/bin/
+/SeparatorStudio.App/obj/
 .DS_Store
