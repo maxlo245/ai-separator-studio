@@ -23,6 +23,7 @@ Application Windows locale pour séparer un morceau audio ou une vidéo en piste
 - [Comprendre les niveaux de modèles](#comprendre-les-niveaux-de-modèles)
 - [Traitement continu 24/7](#traitement-continu-247)
 - [Lanceurs PowerShell existants](#lanceurs-powershell-existants)
+- [Sources et licences des modèles](#sources-et-licences-des-modèles)
 - [Entraînement personnalisé](#entraînement-personnalisé)
 - [Dépannage](#dépannage)
 - [Créer l'exécutable depuis les sources](#créer-lexécutable-depuis-les-sources)
@@ -228,6 +229,49 @@ Pour lancer une séparation depuis PowerShell :
 Set-Location "$env:USERPROFILE\AI-Music-Separation"
 .\Lancer-Separation.ps1
 ```
+
+## Sources et licences des modèles
+
+Le fichier [`LICENSE`](LICENSE) couvre uniquement le code original de l'application et les scripts de ce dépôt. Il ne donne aucun droit sur les poids pré-entraînés ni sur les éléments tiers listés dans [`THIRD_PARTY_NOTICES`](THIRD_PARTY_NOTICES). Les licences des poids ne sont pas nécessairement celles du code qui les charge.
+
+Les modèles Demucs sont associés aux sources officielles et à leurs fichiers de téléchargement publics. Le projet Demucs indique une licence MIT pour son code ; aucune licence distincte n'est fournie avec chaque poids. Les modèles RoFormer ci-dessous sont référencés par le registre d'[`audio-separator`](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json), mais ce registre ne précise pas la licence des poids. Ne supposez pas qu'ils sont libres de redistribution : vérifiez les conditions auprès de l'auteur avant de les copier, publier ou utiliser commercialement.
+
+| Fichier | Source / téléchargement | Licence connue |
+| --- | --- | --- |
+| `models/04573f0d-f3cf25b2.th` | Demucs `htdemucs_ft` (voix) — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/04573f0d-f3cf25b2.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
+| `models/5c90dfd2-34c22ccb.th` | Demucs `htdemucs_6s` — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/5c90dfd2-34c22ccb.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
+| `models/75fc33f5-1941ce65.th` | Demucs `hdemucs_mmi` — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/75fc33f5-1941ce65.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
+| `models/92cfc3b6-ef3bcb9c.th` | Demucs `htdemucs_ft` (other) — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/92cfc3b6-ef3bcb9c.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
+| `models/955717e8-8726e21a.th` | Demucs `htdemucs` — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/955717e8-8726e21a.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
+| `models/d12395a8-e57c48e6.th` | Demucs `htdemucs_ft` (basse) — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/d12395a8-e57c48e6.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
+| `models/f7e0c4bc-ba3fe64a.th` | Demucs `htdemucs_ft` (batterie) — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/f7e0c4bc-ba3fe64a.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
+| `models/bs_roformer_instrumental_resurrection_unwa.ckpt` | Modèle « Instrumental Resurrection » d'Unwa ; rechercher ce nom dans le [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Non indiquée pour le poids |
+| `models/bs_roformer_vocals_revive_v2_unwa.ckpt` | Modèle « Vocals Revive V2 » d'Unwa ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Non indiquée pour le poids |
+| `models/bs_roformer_vocals_revive_v3e_unwa.ckpt` | Modèle « Vocals Revive V3e » d'Unwa ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Non indiquée pour le poids |
+| `models/mel_band_roformer_instrumental_becruily.ckpt` | Modèle instrumental de becruily ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Non indiquée pour le poids |
+| `models/mel_band_roformer_instrumental_fv7z_gabox.ckpt` | Modèle « Instrumental FV7z » de Gabox ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Non indiquée pour le poids |
+| `models/mel_band_roformer_kim_ft2_bleedless_unwa.ckpt` | Modèle « Kim FT 2 Bleedless » d'Unwa ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Non indiquée pour le poids |
+| `models/mel_band_roformer_vocals_becruily.ckpt` | Modèle vocal de becruily ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Non indiquée pour le poids |
+| `models/melband_roformer_inst_v1e_plus.ckpt` | Modèle « Inst V1 (E) Plus » d'Unwa ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Non indiquée pour le poids |
+| `models/vocals_mel_band_roformer.ckpt` | Modèle vocal de Kimberley Jensen ; [source du modèle](https://huggingface.co/KimberleyJSN/melbandroformer) et [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Non indiquée pour le poids |
+| `models/config_bs_roformer_instrumental_resurrection_unwa.yaml` | Configuration du modèle Unwa ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Licence distincte non indiquée |
+| `models/config_bs_roformer_vocals_revive_unwa.yaml` | Configuration des modèles Vocals Revive d'Unwa ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Licence distincte non indiquée |
+| `models/config_mel_band_roformer_instrumental_becruily.yaml` | Configuration du modèle de becruily ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Licence distincte non indiquée |
+| `models/config_mel_band_roformer_instrumental_gabox.yaml` | Configuration des modèles instrumentaux de Gabox ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Licence distincte non indiquée |
+| `models/config_mel_band_roformer_kim_ft_unwa.yaml` | Configuration des modèles Kim FT d'Unwa ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Licence distincte non indiquée |
+| `models/config_mel_band_roformer_vocals_becruily.yaml` | Configuration du modèle vocal de becruily ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Licence distincte non indiquée |
+| `models/config_melbandroformer_inst.yaml` | Configuration des modèles MelBand-RoFormer d'Unwa ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Licence distincte non indiquée |
+| `models/hdemucs_mmi.yaml` | Configuration Demucs ; [fichier publié par UVR](https://github.com/TRvlvr/model_repo/releases/download/all_public_uvr_models/hdemucs_mmi.yaml) | Projet Demucs MIT ; licence propre à ce fichier non précisée |
+| `models/htdemucs.yaml` | Configuration Demucs ; [fichier publié par UVR](https://github.com/TRvlvr/model_repo/releases/download/all_public_uvr_models/htdemucs.yaml) | Projet Demucs MIT ; licence propre à ce fichier non précisée |
+| `models/htdemucs_6s.yaml` | Configuration Demucs ; [fichier publié par UVR](https://github.com/TRvlvr/model_repo/releases/download/all_public_uvr_models/htdemucs_6s.yaml) | Projet Demucs MIT ; licence propre à ce fichier non précisée |
+| `models/htdemucs_ft.yaml` | Configuration Demucs ; [fichier publié par UVR](https://github.com/TRvlvr/model_repo/releases/download/all_public_uvr_models/htdemucs_ft.yaml) | Projet Demucs MIT ; licence propre à ce fichier non précisée |
+| `models/vocals_mel_band_roformer.yaml` | Configuration du modèle de Kimberley Jensen ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Licence distincte non indiquée |
+| `models/download_checks.json` | Registre de téléchargement UVR ; il référence notamment les URL Demucs ci-dessus et les sources de modèles | Licence du fichier de registre non identifiée ; ses URL ne confèrent aucun droit sur les modèles |
+| `weights/model_bs_roformer_ep_17_sdr_9.6568.ckpt` | Checkpoint de départ pour l'entraînement LoRA selon le guide ZFTurbo ; [téléchargement officiel](https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/download/v1.0.12/model_bs_roformer_ep_17_sdr_9.6568.ckpt) | Aucune licence distincte du poids identifiée ; la licence MIT du code ne s'étend pas automatiquement au checkpoint |
+
+Pour récupérer un modèle RoFormer référencé, consultez le registre et demandez à `audio-separator` de le charger par son nom, par exemple `audio-separator input.wav --model_filename vocals_mel_band_roformer.ckpt`. Le téléchargement automatique dépend de la disponibilité du modèle dans la version installée. L'interface graphique de ce dépôt ne télécharge pas elle-même les modèles : elle ne propose que les poids présents dans `models/`. Pour le checkpoint de `weights/`, aucune source de téléchargement vérifiée n'est connue.
+
+Les fichiers de poids sont actuellement suivis par Git LFS. Avant de republier ce dépôt, ses releases ou un miroir, vérifiez les droits de redistribution de chaque poids dont la licence est inconnue.
 
 ## Entraînement personnalisé
 
