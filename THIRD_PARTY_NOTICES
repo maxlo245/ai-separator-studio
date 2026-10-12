@@ -56,8 +56,11 @@ independent contributors, including Unwa, becruily, Gabox, and Kimberley
 Jensen. The registry does not provide per-checkpoint license information for
 the files listed in the README. Verify each model's terms at its author's
 source before redistribution or commercial use. The checkpoint
-weights/model_bs_roformer_ep_17_sdr_9.6568.ckpt has no verified public source
-or license.
+weights/model_bs_roformer_ep_17_sdr_9.6568.ckpt is linked by the ZFTurbo
+training guide as a LoRA fine-tuning starting checkpoint:
+https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/download/v1.0.12/model_bs_roformer_ep_17_sdr_9.6568.ckpt
+Its separate weight license was not identified; the MIT license on the
+training-project software does not automatically license this checkpoint.
 
 External tools
 --------------

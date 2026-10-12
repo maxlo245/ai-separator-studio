@@ -238,13 +238,13 @@ Les modèles Demucs sont associés aux sources officielles et à leurs fichiers 
 
 | Fichier | Source / téléchargement | Licence connue |
 | --- | --- | --- |
-| `models/04573f0d-f3cf25b2.th` | Demucs `htdemucs_ft` — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/04573f0d-f3cf25b2.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
+| `models/04573f0d-f3cf25b2.th` | Demucs `htdemucs_ft` (voix) — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/04573f0d-f3cf25b2.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
 | `models/5c90dfd2-34c22ccb.th` | Demucs `htdemucs_6s` — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/5c90dfd2-34c22ccb.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
 | `models/75fc33f5-1941ce65.th` | Demucs `hdemucs_mmi` — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/75fc33f5-1941ce65.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
-| `models/92cfc3b6-ef3bcb9c.th` | Demucs `htdemucs_ft` — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/92cfc3b6-ef3bcb9c.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
+| `models/92cfc3b6-ef3bcb9c.th` | Demucs `htdemucs_ft` (other) — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/92cfc3b6-ef3bcb9c.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
 | `models/955717e8-8726e21a.th` | Demucs `htdemucs` — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/955717e8-8726e21a.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
-| `models/d12395a8-e57c48e6.th` | Demucs `htdemucs_ft` — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/d12395a8-e57c48e6.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
-| `models/f7e0c4bc-ba3fe64a.th` | Demucs `htdemucs_ft` — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/f7e0c4bc-ba3fe64a.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
+| `models/d12395a8-e57c48e6.th` | Demucs `htdemucs_ft` (basse) — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/d12395a8-e57c48e6.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
+| `models/f7e0c4bc-ba3fe64a.th` | Demucs `htdemucs_ft` (batterie) — [poids officiels](https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/f7e0c4bc-ba3fe64a.th) | Projet Demucs MIT ; licence propre à ce poids non précisée |
 | `models/bs_roformer_instrumental_resurrection_unwa.ckpt` | Modèle « Instrumental Resurrection » d'Unwa ; rechercher ce nom dans le [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Non indiquée pour le poids |
 | `models/bs_roformer_vocals_revive_v2_unwa.ckpt` | Modèle « Vocals Revive V2 » d'Unwa ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Non indiquée pour le poids |
 | `models/bs_roformer_vocals_revive_v3e_unwa.ckpt` | Modèle « Vocals Revive V3e » d'Unwa ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Non indiquée pour le poids |
@@ -267,7 +267,7 @@ Les modèles Demucs sont associés aux sources officielles et à leurs fichiers 
 | `models/htdemucs_ft.yaml` | Configuration Demucs ; [fichier publié par UVR](https://github.com/TRvlvr/model_repo/releases/download/all_public_uvr_models/htdemucs_ft.yaml) | Projet Demucs MIT ; licence propre à ce fichier non précisée |
 | `models/vocals_mel_band_roformer.yaml` | Configuration du modèle de Kimberley Jensen ; [registre audio-separator](https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json) | Licence distincte non indiquée |
 | `models/download_checks.json` | Registre de téléchargement UVR ; il référence notamment les URL Demucs ci-dessus et les sources de modèles | Licence du fichier de registre non identifiée ; ses URL ne confèrent aucun droit sur les modèles |
-| `weights/model_bs_roformer_ep_17_sdr_9.6568.ckpt` | Source de publication et auteur non identifiés ; aucun téléchargement officiel trouvé | Inconnue : ne pas redistribuer. Demander le fichier et ses conditions à son auteur ou réentraîner un modèle |
+| `weights/model_bs_roformer_ep_17_sdr_9.6568.ckpt` | Checkpoint de départ pour l'entraînement LoRA selon le guide ZFTurbo ; [téléchargement officiel](https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/download/v1.0.12/model_bs_roformer_ep_17_sdr_9.6568.ckpt) | Aucune licence distincte du poids identifiée ; la licence MIT du code ne s'étend pas automatiquement au checkpoint |
 
 Pour récupérer un modèle RoFormer référencé, consultez le registre et demandez à `audio-separator` de le charger par son nom, par exemple `audio-separator input.wav --model_filename vocals_mel_band_roformer.ckpt`. Le téléchargement automatique dépend de la disponibilité du modèle dans la version installée. L'interface graphique de ce dépôt ne télécharge pas elle-même les modèles : elle ne propose que les poids présents dans `models/`. Pour le checkpoint de `weights/`, aucune source de téléchargement vérifiée n'est connue.
 
