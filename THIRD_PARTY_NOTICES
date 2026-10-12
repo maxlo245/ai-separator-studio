@@ -1,0 +1,68 @@
+Third-party software and model notices
+======================================
+
+The root LICENSE applies only to original AI Separator Studio application
+source code and scripts. The following components and model assets retain their
+own licenses and terms. Model weights are not licensed by the licenses of the
+software that loads them.
+
+Music-Source-Separation-Training
+--------------------------------
+
+The Music-Source-Separation-Training project is present in
+Music-Source-Separation-Training/. It is licensed under the MIT License,
+Copyright (c) 2024 Roman Solovyev (ZFTurbo). Its complete license is in
+Music-Source-Separation-Training/LICENSE.
+Source: https://github.com/ZFTurbo/Music-Source-Separation-Training
+
+Demucs
+------
+
+The Demucs project states that its software is licensed under the MIT License,
+Copyright Meta Platforms, Inc. and affiliates. Its license and model references
+are published at https://github.com/facebookresearch/demucs. This repository
+includes Demucs checkpoint files and configuration files; no separate license
+statement was found alongside each checkpoint. The Demucs software license
+should not be read as a statement about rights in training datasets or as
+permission to redistribute any checkpoint beyond its applicable terms.
+
+audio-separator
+---------------
+
+audio-separator is an external runtime dependency installed separately by the
+user. Its upstream project is MIT-licensed, Copyright (c) 2023 karaokenerds:
+https://github.com/nomadkaraoke/python-audio-separator
+
+Its model registry is a source for model names and download support, not a
+license grant for the third-party checkpoints listed there:
+https://github.com/nomadkaraoke/python-audio-separator/blob/main/audio_separator/models.json
+
+UVR model registry
+------------------
+
+models/download_checks.json contains download metadata and upstream URLs for
+Demucs and other UVR models. The file does not identify a license for every
+listed model or for each third-party weight. The upstream model repository is
+https://github.com/TRvlvr/model_repo and its application data is at
+https://github.com/TRvlvr/application_data. The source and license of the
+metadata file itself were not identified; its inclusion does not grant rights
+to any model referenced by it.
+
+RoFormer model weights
+----------------------
+
+Several RoFormer checkpoints are attributed in the audio-separator registry to
+independent contributors, including Unwa, becruily, Gabox, and Kimberley
+Jensen. The registry does not provide per-checkpoint license information for
+the files listed in the README. Verify each model's terms at its author's
+source before redistribution or commercial use. The checkpoint
+weights/model_bs_roformer_ep_17_sdr_9.6568.ckpt has no verified public source
+or license.
+
+External tools
+--------------
+
+Python, FFmpeg, .NET, and the Python packages installed by the user are not
+vendored as source dependencies in this repository. Their license terms depend
+on the selected distribution and package versions; consult the license files
+provided by those distributions.
